@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" parallel="methods" time-out="3000" thread-count="2">
+    <!-- Se determina que se ejecutarán los métodos de prueba en paralelo, con un máximo de 2 hilos simultáneos y un tiempo de espera de 3000 ms (3 segundos) para cada prueba. -->
+
+    <test name="Parallel Test">
+
+        <classes>
+            <class name="ParallelTesting"/>
+        </classes>
+    </test>
+</suite>

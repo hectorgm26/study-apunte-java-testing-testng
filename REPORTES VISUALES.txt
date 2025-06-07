@@ -1,0 +1,8 @@
+
+Normalmente los resultados de los test son en consola
+Sin embargo con TestNG al final de cada ejecucion, podemos generar un reporte visual en HTML o XML a traves de una configuracon
+
+* EN INTELIJ IDEA:
+1) Debemos ir a la pestaña de run - configuration - listeners - marcar reportadores por default. Esto en la configuracion de la clase de test que queremos ejecutar.
+2) Luego despues de ejecutar cada test se creara una carpeta llamada test-output
+3) Dentro de esa carpeta habra un archivo emailable-report.html, clic derecho y abrir con el navegador

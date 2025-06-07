@@ -1,0 +1,27 @@
+
+El paralelismo permite ejecutar pruebas simultaneas utilizando diferentes hilos y Threads de ejecución.
+Esto es util cuando queremos realizar pruebas en versiones de software diferente y es la base del Cross-Browser Testing.
+
+Para usar paralelismo en TestNG basta agregar el atributo parallel al tag <suite> del archivo XML de configuración.
+SOLO PUEDE HABER UN SOLO TAG <suite>.
+
+Tanto parallel como thread-count son atributos del tag <suite> y pueden tomar diferentes valores.
+En el caso de parallel, puede tomar los valores "methods", "classes", "test" o "suites".
+Con ello indicamos que la clase, metodos, test o instancias se correra de manera simultanea
+
+Y en el caso de thread-count, indica la cantidad de hilos que queremos destinar a la ejecucion de la suite
+Es decir, de todos los metodos/clases/test/instancias que tenga, solo se ejecutaran los establecidos en thread-count.
+
+El time-out es el tiempo en milisegundos que se esperara, indicando el maximo de tiempo de ejecucion de la suite.
+En el caso de que se sobrepase el time-out, los test seran ignorados y se marcara como fallido.
+
+Ejemplo de archivo XML de configuracion:
+
+<suite name="Suite" parallel="methods" thread-count="3", time-out="1000">
+</suite>
+<suite name="Suite" parallel="classes" thread-count="4" time-out="1000">
+</suite>
+<suite name="Suite" parallel="tests" thread-count="2" time-out="1000">
+</suite>
+<suite name="Suite" parallel="instances" thread-count="2" time-out="1000">
+</suite>

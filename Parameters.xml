@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+
+    <test name="Groups">
+
+        <!-- Insertar Parametros -->
+        <parameter name="parameterFromXML" value="Fernando"/>
+        <!-- SI POR X RAZON SE TIENE COMENTADO EL TAG DE PARAMETER, PERO SE TIENE MARCADA LA PRUEBA CON LA ANOTACION PARAMETERS, FALLARA, PERO INDICARA QUE NO HA SIDO MARCADO COMO OPCIONAL O NO DEFINIDO-->
+        <!-- Si se tiene el @Optional en el metodo de prueba, no fallara, y tomara el valor por defecto que se le haya asignado en la anotacion @Optional, y si no se pasa nada, devolvera null -->
+
+
+        <!-- USO TIPICO EN SELENIUM - CUANDO SE QUIERE ABRIR UNA PAGINA Y NO ESTAR CADA VEZ QUE SE HACE UNA PRUEBA ESCRIBIENDO EL URL, SE CREA URL DE BASE QUE SIEMPRE SERA LA MISMA -->
+        <parameter name="BASEURL" value="www.google.cl"/>
+        <!-- Y el optional servira para que al no encontrar esa url, tome otro valor por defecto y no falle la prueba -->
+
+        <classes>
+            <class name="ParametrizationXML"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,85 @@
+
+TestNG es un framework de pruebas para Java que permite la creación y ejecución de pruebas unitarias, de integración y funcionales. Es ampliamente utilizado en el desarrollo de software para garantizar la calidad del código.
+
+Supera las limitaciones de JUnit al ofrecer características avanzadas como la ejecución paralela de pruebas, la configuración flexible de grupos de pruebas y la capacidad de generar informes detallados.
+
+Ventajas:
+1) Reproducir reportes en formato HTML
+2) Anotaciones fuertemente tipadas (errores en tiempo de compilación)
+3) Los casos de prueba se pueden agrupar y priorizar mas facilmente
+4) Es posible ejecutar pruebas en paralelo
+5) Permite generar registros de reportes/resultado (logs)
+6) La parametrización de pruebas y sus datos es más sencilla, a traves de un documento xml o con la anotacion dataProvider
+
+Orden de ejecución de las anotaciones:
+@BeforeSuite
+    @BeforeTest
+        @BeforeClass
+            @BeforeGroup
+                @BeforeMethod
+                    @Test
+                        @AfterMethod
+                            @AfterGroup
+                                @AfterClass
+                                    @AfterTest
+                                        @AfterSuite
+
+Atributos usados con las anotaciones:
+- description: Define el metodo de prueba. Se puede definir lo que hace un metodo a traves de su descripcion
+- alwaysRun: Se usa con un metodo de prueba del cual se quiere asegurar que se ejecute siempre, independientemente de si falla o no. Con valor verdadero siempre se ejecutara
+- dataProvider: Se usa para proporcionar datos de prueba a un metodo de prueba. Permite ejecutar el mismo metodo de prueba con diferentes conjuntos de datos
+- dependsOnMethods: Se usa para proporcionar detalles sobre el flujo de ejecucion, en el que la prueba se ejecuta solo si se ejecuta un metodo dependiente mencionado en el atributo. En caso de que la prueba de la que depende el metodo falle o no se ejecute, se salta la ejecucion del metodo
+- groups: Se usa para agrupar metodos de prueba. Permite ejecutar un grupo de pruebas especifico o excluirlo de la ejecucion, centrandose en una sola funcionalidad o caracteristica del software
+- dependsOnGroups: Similar a dependsOnMethods, pero se usa para agrupar metodos de prueba. Permite definir dependencias entre grupos de pruebas mejorando la organizacion y ejecucion de pruebas. Permite definir dependencias entre grupos de pruebas
+- priority: Se usa para definir el orden de ejecucion de los metodos de prueba. Los metodos con menor valor de prioridad se ejecutan primero. Si no se define, el valor por defecto es 0
+- enabled: Se usa para habilitar o deshabilitar un metodo de prueba cuando no se quiere que se ejecute. Si se establece en falso, el metodo no se ejecutara
+- timeout: ayuda a definir el tiempo en que una prueba en particular debe tardar en ejecutarse. En caso de que exceda el tiempo definido por el atributo, el metodo de prueba terminaria y fallaria con una excepcion marcada como org.testng.internal.thread.ThreadTimeoutException
+- invocationCount: Se usa para definir el numero de veces que se ejecutara un metodo de prueba. Permite ejecutar un metodo varias veces con el mismo conjunto de datos
+- expectedExceptions: Se usa para definir las excepciones que se esperan que se lancen durante la ejecucion de un metodo de prueba. Si se lanza una excepcion diferente, la prueba fallara
+
+ANOTACIONES PARA UN PROPOSITO ESPECIFICO:
+@dataProvider: Se usa para suministrar datos al metodo de prueba en el que se define el atributo dataProvider. Permite ejecutar el mismo metodo de prueba con diferentes conjuntos de datos. @dataProvider SE PREFIERE CUANDO SE TIENEN CONJUNTOS DE DATOS MAS GRANDES O COMPLEJOS
+@Factory: Se usa como ayuda para ejecutar varias clases de prueba, a atraves de una sola clase de prueba. Basicamente define y crea pruebas de forma dinamica
+@Listeners: Se usa para definir una clase que implementa la interfaz ITestListener, que permite escuchar eventos de prueba y realizar acciones personalizadas en respuesta a esos eventos. Permite personalizar el comportamiento del framework de pruebas. Tenemos multiples listeners como ITestListener, IInvokedMethodListener, ISuiteListener, IReporter, etc.
+@Parameters: Se usa para pasar parametros a un metodo de prueba desde un archivo XML de configuracion. Permite ejecutar el mismo metodo de prueba con diferentes valores de parametros. ESTE SE PREFIERE EN CONTEXTOS CUANDO SE TIENEN CONJUNTOS DE DATOS LIMITADOS PARA LA EJECUCION DE PRUEBAS, MIENTRAS QUE @dataProvider SE PREFIERE CUANDO SE TIENEN CONJUNTOS DE DATOS MAS GRANDES O COMPLEJOS
+
+Agrupamiento y grupos de grupos:
+se realiza en el archivo XML de configuracion, donde se definen los grupos de pruebas y se especifica que metodos pertenecen a cada grupo.
+Esto permite ejecutar un grupo de pruebas especifico o excluirlo de la ejecucion, centrandose en una sola funcionalidad o caracteristica del software.
+Asi mismo nos permite crear grupos de grupos y grupos parciales para controlar la ejecucion a nivel mas especifico.
+
+Ejemplo:
+```xml
+<test name="Test1">
+    <groups>
+        <define name="group1"/>
+            <include name="defect"/>  <!-- Nombre de las prueas que se ejecutaran -->
+        </define>
+
+        <run>
+            <include name="group1"/>
+            <exclude name="group2"/>
+        </run>
+    </groups>
+
+    <classes>
+        <class name="com.example.TestClass"/>
+        <class name="com.example.AnotherTestClass"/>
+    </classes>
+</test>
+
+RECOMENDACION: CON INTELIJ DESCARGAR EL PLUGIN Create TestNG XML, para crear el archivo XML de configuracion de forma mas sencilla.
+Hay que cambiarle el nombre con refactor para posterior no tener problemas
+Luego boton derecho en la clase y click en Create TestNG XML, y se creara el archivo XML de configuracion con las clases de prueba seleccionadas.
+Posterior control + alt para seleccionar el contenido, y se formatea con ctrl + alt + L.
+Borrar el verbose="2" preserve-order="true" y el name, y de alli en adelante se puede editar el XML de configuracion a gusto.
+Y si se quiere correr el xml, clic derecho y darle run al archivo xml
+
+
+En cuanto a la dependencia, TestNg nos permite controlar el orden de ejecucion de los metodos de prueba,
+definiendo que prueba necesita ser ejecutada antes de otra
+Se usa el atributo dependsOnMethods para definir la dependencia entre metodos de prueba, las cuales seran en base a metodos que se ejecutan antes de otro.
+
+En cuanto a la prioridad, se usa el atributo priority para definir el orden de ejecucion de los metodos de prueba, determinando cual metodo tiene mas peso que otro
+Si se colocan todos en la misma prioridad, esta se determinara por el nombre del metodo de prueba, y se ejecutara en orden alfabetico.
+

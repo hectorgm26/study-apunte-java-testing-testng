@@ -1,0 +1,74 @@
+
+Existen varias interfaces que permiten modificar el comportamiento de TestNG
+Estas interfaces se denominan TestNG Listeners
+y se implementan en clases que pueden ser registradas en el archivo de configuración XML de TestNG
+o mediante anotaciones en las clases de prueba.
+
+Algunas de las interfaces más comunes son:
+
+- ITestListener: Permite modificar el comportamiento al momento de iniciar, finalizar, pasar, fallar u omitir una prueba.
+Para hacer uso de ella es necesario tener una clase de definicion que la implemente.
+EJEMPLO:
+
+public class listenerDefinition implements ITestListener {
+    @Override
+    public void onTestStart(ITestResult result) {
+        System.out.println("La prueba ha comenzado: " + result.getName());
+    }
+
+    @Override
+    public void onTestSuccess(ITestResult result) {
+        System.out.println("La prueba ha pasado: " + result.getName());
+    }
+
+    @Override
+    public void onTestFailure(ITestResult result) {
+        System.out.println("La prueba ha fallado: " + result.getName());
+    }
+
+    @Override
+    public void onTestSkipped(ITestResult result) {
+        System.out.println("La prueba ha sido omitida: " + result.getName());
+    }
+}
+
+Luego debemos usar la anotacion @Listeners en la clase de prueba para registrar el listener
+Para asi referenciar a la clase que implementa la interfaz ITestListener y poder usarla
+@Listeners(listenerDefinition.class)
+public class listenerImplementation() {
+    @Test
+    public void testMethod() {
+        // Código de la prueba
+    }
+
+}
+
+PERO ESTO ES POCO PRACTICO, CUANDO SE TIENEN DEMASIADAS CLASES, YA QUE DEBERIAMOS PONER LA ANOTACION ARRIBA DE CADA UNA DE LAS CLASES DE PRUEBA.
+CUANDO OCURRE ESO, SE RECURRE A LA CONFIGURACION DEL ARCHIVO XML DE TESTNG, para utilizarlo a nivel de suite
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Listener_Suite">
+    <listeners>
+        <listener class-name="Listeners.ITestListenerDefinition"/>
+    </listeners>
+
+    <test name="ITestListener_SuiteLevel">
+        <classes>
+            <class name="Listeners.ITestListenerImplementation"/>
+        </classes>
+    </test>
+</suite>
+ASI YA NO SE NECESITA LA A NOTACION @Listeners EN CADA CLASE DE PRUEBA, YA QUE SE REGISTRA A NIVEL DE SUITE.
+
+
+- IMethodInterceptor: Permite modificar el orden de ejecución de los métodos de prueba.
+- IExecutionListener: Permite realizar acciones antes y después de la ejecución de un conjunto de pruebas.
+- ITest: Permite realizar acciones antes y después de la ejecución de una prueba específica.
+- IHookeable: Permite realizar acciones antes y después de la ejecución de un método de prueba, incluyendo la posibilidad de omitirlo.
+- IReporter: Permite generar informes personalizados después de la ejecución de las pruebas.
+- IInvokedMethod: Permite realizar acciones antes y después de la ejecución de un método invocado, ya sea un método de prueba o un método de configuración.
+- ISuite: Permite realizar acciones antes y después de la ejecución de un conjunto de pruebas (suite).
+- IConfiguration: Permite realizar acciones antes y después de la ejecución de un método de configuración, como @BeforeSuite, @BeforeTest, @BeforeClass, etc.
+
+

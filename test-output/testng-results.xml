@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-06-07T19:47:00 CLT" name="Default Suite" finished-at="2025-06-07T19:47:01 CLT" duration-ms="205">
+    <groups>
+    </groups>
+    <test started-at="2025-06-07T19:47:00 CLT" name="JavaTestNgTesting" finished-at="2025-06-07T19:47:01 CLT" duration-ms="205">
+      <class name="ParallelTesting">
+        <test-method signature="test1()[pri:0, instance:ParallelTesting@161b062a]" started-at="2025-06-07T19:47:01 CLT" name="test1" finished-at="2025-06-07T19:47:01 CLT" duration-ms="21" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test1 -->
+        <test-method signature="test2()[pri:0, instance:ParallelTesting@161b062a]" started-at="2025-06-07T19:47:01 CLT" name="test2" finished-at="2025-06-07T19:47:01 CLT" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test2 -->
+        <test-method signature="test3()[pri:0, instance:ParallelTesting@161b062a]" started-at="2025-06-07T19:47:01 CLT" name="test3" finished-at="2025-06-07T19:47:01 CLT" duration-ms="5" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test3 -->
+        <test-method signature="test4()[pri:0, instance:ParallelTesting@161b062a]" started-at="2025-06-07T19:47:01 CLT" name="test4" finished-at="2025-06-07T19:47:01 CLT" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test4 -->
+        <test-method signature="test4()[pri:0, instance:ParallelTesting@161b062a]" started-at="2025-06-07T19:47:01 CLT" name="test4" finished-at="2025-06-07T19:47:01 CLT" duration-ms="3" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test4 -->
+        <test-method signature="test4()[pri:0, instance:ParallelTesting@161b062a]" started-at="2025-06-07T19:47:01 CLT" name="test4" finished-at="2025-06-07T19:47:01 CLT" duration-ms="3" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test4 -->
+      </class> <!-- ParallelTesting -->
+    </test> <!-- JavaTestNgTesting -->
+  </suite> <!-- Default Suite -->
+</testng-results>

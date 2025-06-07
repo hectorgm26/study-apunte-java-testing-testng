@@ -1,0 +1,78 @@
+
+En algunos casos debido a la logica del negocio
+es necesario ejecutar un test de manera indefinida variando los datos de entrada durante cada ejecucion
+
+Ejemplo: una prueba con miles de datos de entrada que se ejecuta una vez por cada dato de entrada, los cuales son dinamicos
+
+En testng hay dos tipos de parametrizacion:
+
+1) A traves de un archivo XML
+Utiliza la anotacion @Parameters para pasar valores a los metodos con la anotacion @Test utilizando un archivo XML
+
+2) A traves de un Data Provider
+Utiliza la anotacion @dataProvider para pasar valores a los metodos con la anotacion @Test a traves de un array
+Permite utilizar multples conjuntos de datos.
+dataProvider trabaja con arreglos de la forma M*N donde M representa la cantidad de ejecuciones y N los parametros a utilizar
+
+Ejemplo con XML:
+
+public class Param {
+    @Test
+    @Parameters({"user})
+    public void testParameters(String user) {
+        System.out.println("User: " + user);
+    }
+}
+
+XML
+<test name="Param">
+    <parameter name="user" value="admin"/>
+    <classes>
+        <class name="Param">
+
+        </class>
+    </classes>
+</test>
+
+Ejemplo con dataProvider:
+Primero se requiere declarar un objeto bidimensional de la forma M*N. Dicho objeto puede ser llenado de 2 maneras,
+y finalmente se debe referenciar al set de datos en el @Test utilizando el atributo dataProvider
+
+// FORMA 1 DE LLENADO
+@dataProvider
+public Object[][] testData() {
+    // Declaramos el objeto bidimensional
+    Object[][] data = new Object[3][2]; // 3 filas y 2 columnas
+
+    // Primera fila
+    data[0][0] = "User1"; // primera caja, primer espacio = usuario
+    data[0][1] = "Pass1"; // primera caja, segundo espacio = contraseña
+
+    // Segunda fila
+    data[1][0] = "User2"; // segunda caja, primer espacio
+    data[1][1] = "Pass2"; // segunda caja, segundo espacio
+
+    // Tercera fila
+    data[2][0] = "User3"; // tercera caja, primer espacio
+    data[2][1] = "Pass3"; // tercera caja, segundo espacio
+
+    return data;
+}
+
+// FORMA 2 DE LLENADO
+@dataProvider
+public Object[][] testData2() {
+    return new Object[][]
+        {
+            {"User1", "Pass1", "3"},
+            {"User2", "Pass2", "4"},
+            {"User3", "Pass3", "9"}
+        };
+}
+
+@Test(dataProvider = "testData2") // REFERENCIAMOS AL NOMBRE DEL OBJETO DATA PROVIDER
+public void test (String user, String pwd, String id) {
+    System.out.println("El usuario es: " + user);
+    System.out.println("La contraseña es: " + pwd);
+    System.out.println("El id es: " + id);
+}

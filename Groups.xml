@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="Groups">
+
+        <groups>
+
+            <!-- Definir metagrupos (grupos de grupos) -->
+            <!--            <define name="SprintDone"> &lt;!&ndash; Se define un grupo llamado SprintDone, que estara compuesto por dos grupos &ndash;&gt;-->
+            <!--                <include name="backlog"/>-->
+            <!--                <include name="defects"/>-->
+            <!--            </define>-->
+
+            <run>
+                <!-- <include name="smoke"/> VA A CORRER LOS GRUPOS DEFINIDOS CON LA ANOTACION @Test(groups) -->
+
+                <!--                <include name="SprintDone"/>-->
+                <!--                <exclude name="smoke"/>-->
+
+                <!--                <include name=".*fixed"/> &lt;!&ndash; Correr pruebas que coincidan con expresiones regulares. El * determinara que se corran todas las pruebas que empiecen con sm.*, o que terminen con .*sm, o que contengan sm en cualquier parte del nombre. &ndash;&gt;-->
+                <include name="Suite1"/>
+                <exclude name="smoke"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="Groups"/>
+        </classes>
+    </test>
+</suite>

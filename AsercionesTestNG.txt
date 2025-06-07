@@ -1,0 +1,37 @@
+
+Las assertions son lineas de codigo que sirven para verificar condiciones y nos ayudan a decidir si una prueba se considera exitosa o fallida
+
+Assertions mas utilizadas en TestNG:
+
+// assertEquals: Verifica que dos valores sean iguales.
+// assertNotEquals: Verifica que dos valores no sean iguales
+
+// assertTrue: Verifica que una condicion sea verdadera
+// assertFalse: Verifica que una condicion sea falsa
+
+// assertSame: Verifica que dos objetos hagan referencia en memoria al mismo objeto
+// assertNotSame: Verifica que dos objetos no hagan referencia en memoria al mismo objeto
+
+// assertNull: Verifica que un objeto sea nulo
+// assertNotNull: Verifica que un objeto no sea nulo
+
+// assertInstanceOf: Verifica que un objeto sea una instancia de una clase especifica
+// assertNotInstanceOf: Verifica que un objeto no sea una instancia de una clase especifica
+
+// assertArrayEquals: Verifica que dos arreglos sean iguales
+// assertThrows: Verifica que se lance una excepcion especifica
+// assertTimeout: Verifica que un bloque de codigo se ejecute dentro de un tiempo especifico
+
+
+TIPOS DE ASSERTIONS EN TESTNG:
+- HARD ASERTIONS: Detienen la ejecucion del test al fallar una asercion
+moviendose a la siguiente anotacion marcada como @Test. Al encontrar un error reporta la prueba como fallida
+Es la opcion por defecto en TestNG y no necesitan un objeto auxiliar para funcionar
+
+- SOFT ASERTIONS: Permiten continuar la ejecucion del test aun si una asercion falla,
+reportando todas las fallas al final del test. Si encuentra un error, lo omite, saltando a la siguiente asercion,
+pero obteniendo igualmente los resultados de todos los metodos de pruebas con assertions suaves.
+Necesitan un objeto auxiliar softAssert.tipoDeAssert para funcionar, y necesitan la propiedad assertAll() para mostrar excepciones al final del test
+
+// assertSoftly: Permite realizar aserciones suaves, donde las fallas no detienen la ejecucion del test y se reportan al final
+// assertAll: Agrupa varias aserciones y las ejecuta, reportando todas las fallas al mismo tiempo
